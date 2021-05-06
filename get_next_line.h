@@ -6,7 +6,7 @@
 /*   By: sgoffaux <sgoffaux@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 11:03:07 by sgoffaux          #+#    #+#             */
-/*   Updated: 2021/05/04 12:27:07 by sgoffaux         ###   ########.fr       */
+/*   Updated: 2021/05/06 15:26:17 by sgoffaux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <unistd.h>
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 32
+# endif
 
 int	get_next_line(int fd, char **line);
 
