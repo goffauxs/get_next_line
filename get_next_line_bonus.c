@@ -6,7 +6,7 @@
 /*   By: sgoffaux <sgoffaux@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 11:05:16 by sgoffaux          #+#    #+#             */
-/*   Updated: 2021/05/10 16:32:39 by sgoffaux         ###   ########.fr       */
+/*   Updated: 2021/05/10 15:19:16 by sgoffaux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,14 @@ static int	ft_add_to_line(char **line, char *buf)
 
 static int	ft_get_next_line(int fd, char **line)
 {
-	static char		buf[BUFFER_SIZE + 1];
+	static char		buf[FD_MAX][BUFFER_SIZE + 1];
 	int				ret;
 	
 	*line = NULL;
-	ret = ft_add_to_line(line, buf);
+	ret = ft_add_to_line(line, buf[fd]);
 	while (ret != -1 && (*line)[ret] != '\n')
 	{
-		ret = read(fd, buf, BUFFER_SIZE);
+		ret = read(fd, buf[fd], BUFFER_SIZE);
 		if (ret < 1)
 		{
 			if (ret < 0)
@@ -78,8 +78,8 @@ static int	ft_get_next_line(int fd, char **line)
 			}
 			return (ret);
 		}
-		buf[ret] = '\0';
-		ret = ft_add_to_line(line, buf);
+		buf[fd][ret] = '\0';
+		ret = ft_add_to_line(line, buf[fd]);
 	}
 	if (ret == -1)
 		return (-1);
@@ -89,8 +89,7 @@ static int	ft_get_next_line(int fd, char **line)
 
 int	get_next_line(int fd, char **line)
 {
-	if (fd < 0 || !line || BUFFER_SIZE < 1)
+	if (fd < 0 || fd > FD_MAX || !line || BUFFER_SIZE < 1)
 		return (-1);
 	return (ft_get_next_line(fd, line));
 }
-
