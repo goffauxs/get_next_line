@@ -6,7 +6,7 @@
 /*   By: sgoffaux <sgoffaux@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 11:05:16 by sgoffaux          #+#    #+#             */
-/*   Updated: 2021/05/10 16:32:39 by sgoffaux         ###   ########.fr       */
+/*   Updated: 2021/05/13 11:10:40 by sgoffaux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static int	ft_get_next_line(int fd, char **line)
 {
 	static char		buf[BUFFER_SIZE + 1];
 	int				ret;
-	
+
 	*line = NULL;
 	ret = ft_add_to_line(line, buf);
 	while (ret != -1 && (*line)[ret] != '\n')
@@ -93,4 +93,3 @@ int	get_next_line(int fd, char **line)
 		return (-1);
 	return (ft_get_next_line(fd, line));
 }
-
