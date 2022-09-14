@@ -1,6 +1,11 @@
 # get_next_line
 Simple function to parse files line by line
 
+## About
+The function works using a static buffer that gets modified everytime the function is called.
+
+The size of the buffer can be modified in the header file
+
 ## Example usage
 ```C
 #include <stdio.h>
